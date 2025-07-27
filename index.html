@@ -59,15 +59,21 @@
 
 <!-- ===== Figure 2.1 ===== -->
 <section id="fig-network">
-  <h2>Correlation Network of the Multiphase System</h2>
+  <h2>How the Players Interact?</h2>
   <div class="img">
     <img src="assets/img/correlation-network.png" alt="Correlation network of the multiphase system">
   </div>
 </section>
 
 <!-- ===== Error‑correction Scheme ===== -->
+<style>
+  /* 缩进用的统一容器 */
+  .step{margin-left:1.5rem;}
+  .step .math-block{margin-left:1.5rem;}
+</style>
+
 <section id="error-scheme">
-  <h2>Rotation‑induced Error‑correction Scheme</h2>
+  <h2>Correction Scheme for Rotation-Induced Geometrical Error</h2>
 
   <h3 style="margin-top:1.2rem;">1&nbsp;·&nbsp;Probing the error ⇒ correction</h3>
   <div class="math-block">\( S' \;=\; S^{*} + \left.\dfrac{\partial S^{*}}{\partial t^{*}}\right|_{\text{vorticity}} \Delta t^{*} = V'\,D'\,V'^{T} \)</div>
@@ -91,13 +97,13 @@
   \]</div>
 
   <h3 style="margin-top:1.2rem;">3&nbsp;·&nbsp;Outcome</h3>
-  <p style="margin-left:1rem;">The correction fully nullifies the geometrical error in the rotational‑flow test case. More details are in the thesis.</p>
+  <p style="margin-left:1rem;">The scheme nullifies the geometrical error caused by droplet rotation. More details are in the thesis.</p>
 </section>
 
 <!-- ===== Bubble Snapshot ===== -->
 <section id="bubble">
-  <h2>Isotropic‑turbulence Bubble Snapshot</h2>
-  <p>Instantaneous bubble shape captured inside decaying isotropic turbulence.</p>
+  <h2>Some Snapshots</h2>
+  <p>Bubbles in isotropic decaying turbulence.</p>
   <div class="img">
     <img src="assets/img/bubble-isot.png" alt="Bubble in isotropic turbulence">
   </div>
@@ -105,8 +111,7 @@
 
 <!-- ===== Flow‑field ===== -->
 <section id="flow-field">
-  <h2>Flow‑field Visualisation</h2>
-  <p>Velocity‑magnitude rendering of the droplet‑laden turbulence field.</p>
+  <p>Flow velocity in x-direction.</p>
   <div class="img">
     <img src="assets/img/turbulence-field.png" alt="Droplet‑laden turbulence field">
   </div>
