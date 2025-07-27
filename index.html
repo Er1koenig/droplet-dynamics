@@ -1,122 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Droplet Dynamics – Project Page</title>
+<meta charset="utf-8" />
+<title>Droplet Dynamics – Sub‑Kolmogorov Bubble & Droplet Model</title>
 <style>
-    :root{
-        --clr-bg:#f9fbfe;
-        --clr-primary:#0d3b66;
-        --clr-accent:#2196f3;
-        --clr-card:#e9f0fa;
-        --clr-shadow:rgba(13,59,102,.08);
-        --radius-lg:1.25rem;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-         line-height:1.6;background:var(--clr-bg);color:#222}
-    header{padding:4rem 1rem 2rem;text-align:center;background:linear-gradient(135deg,#e3f2fd,#f6f6ff)}
-    header h1{font-size:clamp(2rem,5vw,3rem);color:var(--clr-primary);margin-bottom:.5rem}
-    header p{font-size:1.1rem;color:#555}
-    .container{max-width:1000px;margin:auto;padding:2rem 1rem}
-    figure{margin:2rem 0;text-align:center}
-    figure img{max-width:100%;border-radius:var(--radius-lg);box-shadow:0 4px 12px var(--clr-shadow)}
-    figure figcaption{margin-top:.75rem;font-size:.9rem;color:#555}
-    .highlights{display:grid;gap:1rem;margin:2rem 0;
-                grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .highlights div{background:var(--clr-card);border-radius:var(--radius-lg);
-                    padding:1.25rem;box-shadow:0 2px 6px var(--clr-shadow);}
-    .highlights div h3{color:var(--clr-primary);font-size:1.05rem;margin-bottom:.5rem}
-    .highlights div p{font-size:.9rem}
-    .btn{display:inline-block;margin-top:2rem;background:var(--clr-accent);color:#fff;
-         padding:.75rem 1.5rem;border:none;border-radius:var(--radius-lg);
-         text-decoration:none;font-weight:600;transition:.2s}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px var(--clr-shadow)}
-    @media(prefers-color-scheme:dark){
-        body{background:#10141b;color:#eee}
-        header{background:#0d1117}
-        .highlights div{background:#161b22}
-        figure img{filter:brightness(.9)}
-    }
+  body{font-family:system-ui,sans-serif;line-height:1.6;margin:0;padding:0 1.5rem;}
+  h1,h2{color:#1a3353;margin-top:2rem;}
+  ul{margin-left:1rem;}
+  code{background:#f5f5f5;padding:0.1rem 0.3rem;border-radius:4px;}
+  .img{margin:2rem 0;text-align:center;}
+  .img img{max-width:100%;height:auto;border:1px solid #ccc;border-radius:8px;}
+  .btn{display:inline-block;margin:2rem 0;background:#1a3353;color:#fff;
+       padding:0.6rem 1.2rem;text-decoration:none;border-radius:6px;}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Droplet Dynamics</h1>
-  <p>Simulation of sub‑Kolmogorov deformable droplets &amp; bubbles<br>
-     coupled with an in‑house Lattice Boltzmann solver</p>
-</header>
+<section id="overview">
+  <h1>Project Overview</h1>
+  <p>
+    This project augments an <em>in‑house Lattice Boltzmann solver</em> with an
+    Euler–Lagrange module that tracks <strong>deformable, sub‑Kolmogorov droplets
+    and bubbles</strong>. The model conserves volume, resolves shape evolution via
+    the Maffettone–Minale formulation, and supports two‑way momentum coupling.
+  </p>
+  <ul>
+    <li>Novel correction term eliminates rotation‑induced geometry error in pure vortex flow.</li>
+    <li>Validation in quiescent, shear and vortex tests; benchmarked an oblate rising bubble.</li>
+    <li>Direct numerical simulation of droplet‑laden isotropic turbulence.</li>
+  </ul>
+  <a class="btn" href="Droplet_Dynamics_Thesis.pdf" target="_blank">Download Full Thesis ↗</a>
+</section>
 
-<main class="container">
-
-  <!-- Figure 2.1 -->
-  <figure>
+<!-- === Figure 2.1 === -->
+<section id="fig-network">
+  <h2>Correlation Network of the Multiphase System</h2>
+  <div class="img">
     <img src="assets/img/correlation-network.png" alt="Correlation network of the multiphase system">
-    <figcaption>Figure 2.1 – Correlation network of the multiphase system</figcaption>
-  </figure>
+  </div>
+</section>
 
-  <section>
-    <h2>Project Overview</h2>
-    <p>
-      This project extends the <em>m‑AIA</em> multi‑physics framework with a
-      two‑way coupled Euler‑Lagrangian module that tracks <strong>deformable,
-      Kolmogorov‑sized bubbles and droplets</strong>. Key elements include:<br><br>
-      • Volume‑conserving shape evolution based on the Maffettone–Minale model<br>
-      • Novel correction term that eliminates rotation‑induced geometry error during pure vortex motion:contentReference[oaicite:5]{index=5}<br>
-      • Stable motion equation reformulated for high-density‑ratio regimes:contentReference[oaicite:6]{index=6}<br>
-      • Validation in quiescent, shear and vortex flows, rising‑bubble benchmark, and DNS of decaying isotropic turbulence:contentReference[oaicite:7]{index=7}
-    </p>
-  </section>
+<!-- === Error‑correction Scheme === -->
+<section id="error-scheme">
+  <h2>Rotation‑induced Error‑correction Scheme</h2>
+  <p>The slide below illustrates the additional shape‑correction term and its switch‑off criterion near steady state.</p>
+  <div class="img">
+    <img src="assets/img/error-correction.png" alt="Shape‑correction scheme for rotation‑induced geometrical error">
+  </div>
+</section>
 
-  <section class="highlights">
-      <div>
-        <h3>Rotation‑error Correction</h3>
-        <p>Eliminates spurious aspect‑ratio drift during pure rotation, ensuring
-           physically consistent shape dynamics.</p>
-      </div>
-      <div>
-        <h3>Oblate Rising Bubble</h3>
-        <p>Captures path‑instability and drag‑increase as the bubble evolves toward
-           an oblate shape in laminar rise tests.</p>
-      </div>
-      <div>
-        <h3>Droplets in Isotropic Turbulence</h3>
-        <p>DNS shows smaller droplets accelerate TKE decay, while large droplets
-           retain kinetic energy through inertia.</p>
-      </div>
-      <div>
-        <h3>Constant‑Load Cases</h3>
-        <p>Suite of canonical flows (shear, vortex, quiescent) used for
-           systematic verification and parameter sweeps.</p>
-      </div>
-  </section>
+<!-- === Bubble Snapshot === -->
+<section id="bubble">
+  <h2>Isotropic‑turbulence Bubble Snapshot</h2>
+  <p>Instantaneous bubble shape captured inside decaying isotropic turbulence.</p>
+  <div class="img">
+    <img src="assets/img/bubble-isot.png" alt="Bubble in isotropic turbulence">
+  </div>
+</section>
 
-  <!-- Bubble image -->
-  <figure>
-    <img src="assets/img/oblate-bubble.png" alt="Oblate rising bubble">
-    <figcaption>Oblate rising bubble – simulation snapshot</figcaption>
-  </figure>
-
-  <!-- Flow‑field image -->
-  <figure>
-    <img src="assets/img/turbulence-field.png" alt="Droplet‑laden isotropic turbulence">
-    <figcaption>Instantaneous flow‑field coloured by vorticity magnitude</figcaption>
-  </figure>
-
-  <section>
-    <h2>Main Findings</h2>
-    <ul>
-      <li>Shape‑controlled drag &amp; lift models predict terminal velocity trends across <code>Ca&nbsp;&le;&nbsp;0.1</code>.</li>
-      <li>Volume‑control scheme cuts numerical mass loss by up to two orders of magnitude:contentReference[oaicite:8]{index=8}.</li>
-      <li>In turbulence, highly deformable droplets (<code>Ca&nbsp;≈&nbsp;0.1</code>) expedite energy dissipation; bubbles exert negligible influence on TKE spectra:contentReference[oaicite:9]{index=9}.</li>
-    </ul>
-  </section>
-
-  <a class="btn" href="Tao_BSc_thesis.pdf" target="_blank">Download Full Thesis&nbsp;↗</a>
-
-</main>
+<!-- === Flow‑field === -->
+<section id="flow-field">
+  <h2>Flow‑field Visualisation</h2>
+  <p>Velocity‑magnitude rendering of the droplet‑laden turbulence field.</p>
+  <div class="img">
+    <img src="assets/img/turbulence-field.png" alt="Droplet‑laden turbulence field">
+  </div>
+</section>
 
 </body>
 </html>
