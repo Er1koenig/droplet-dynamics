@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>Droplet Dynamics – Sub‑Kolmogorov Bubble & Droplet Model</title>
 
-<!-- 1. 轻量级页面样式 -->
+<!-- ========== Minimal page styling ========== -->
 <style>
   body{font-family:system-ui,sans-serif;line-height:1.6;margin:0;padding:0 1.5rem;}
   h1,h2{color:#1a3353;margin-top:2rem;}
@@ -12,16 +12,30 @@
   code{background:#f5f5f5;padding:0.1rem 0.3rem;border-radius:4px;}
   .img{margin:2rem 0;text-align:center;}
   .img img{max-width:100%;height:auto;border:1px solid #ccc;border-radius:8px;}
-  .btn{display:inline-block;margin:2rem 0;background:#1a3353;color:#fff;
-       padding:0.6rem 1.2rem;text-decoration:none;border-radius:6px;}
-  /* 让公式与正文有呼吸感 */
+
+  /* subtle outlined link‑button for the PDF */
+  .download-link{
+    display:inline-block;
+    margin-left:.6rem;
+    padding:.4rem 1rem;
+    font-size:.95rem;
+    color:#1a3353;
+    border:1px solid currentColor;
+    border-radius:4px;
+    text-decoration:none;
+    transition:.2s;
+  }
+  .download-link:hover{
+    background:#1a3353;
+    color:#fff;
+  }
+
+  /* spacing around block equations */
   .math-block{margin:1rem 0;}
 </style>
 
-<!-- 2. 引入 MathJax（CDN） -->
-<script async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+<!-- ========== MathJax for LaTeX rendering ========== -->
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -31,15 +45,16 @@
   <p>
     This project augments an <em>in‑house Lattice Boltzmann solver</em> with an
     Euler–Lagrange module that tracks <strong>deformable, sub‑Kolmogorov droplets
-    and bubbles</strong>. The model conserves volume, resolves shape evolution via
-    the Maffettone–Minale formulation, and supports two‑way momentum coupling.
+    and bubbles</strong>.
+    <a class="download-link" href="Droplet_Dynamics_Thesis.pdf" target="_blank">
+      Full&nbsp;Thesis&nbsp;PDF&nbsp;↗
+    </a>
   </p>
   <ul>
     <li>Novel correction term eliminates rotation‑induced geometry error in pure vortex flow.</li>
     <li>Validation in quiescent, shear and vortex tests; benchmarked an oblate rising bubble.</li>
     <li>Direct numerical simulation of droplet‑laden isotropic turbulence.</li>
   </ul>
-  <a class="btn" href="Droplet_Dynamics_Thesis.pdf" target="_blank">Download Full Thesis ↗</a>
 </section>
 
 <!-- ===== Figure 2.1 ===== -->
@@ -54,35 +69,29 @@
 <section id="error-scheme">
   <h2>Rotation‑induced Error‑correction Scheme</h2>
 
-  <!-- 子弹 1 -->
   <h3 style="margin-top:1.2rem;">1&nbsp;·&nbsp;Probing the error ⇒ correction</h3>
-  <div class="math-block">\( S' \;=\; S^{\*} \;+\;
-      \left.\frac{\partial S^{\*}}{\partial t^{\*}}\right|_{\text{vorticity}}
-      \,\Delta t^{\*} \;=\; V' \,D'\, V'^{T} \)</div>
+  <div class="math-block">\( S' \;=\; S^{*} + \left.\dfrac{\partial S^{*}}{\partial t^{*}}\right|_{\text{vorticity}} \Delta t^{*} = V'\,D'\,V'^{T} \)</div>
 
   <div class="math-block">\[
-    \frac{d S^{\*}}{d t^{\*}}
-    = (\Omega^{\*} S^{\*} - S^{\*} \Omega^{\*})
-    \;-\; \frac{f_{1}}{\mathrm{Ca}}\bigl[\,S^{\*}-g(S^{\*})I\,\bigr]
-    \;+\; f_{2}\bigl(E^{\*} S^{\*} + S^{\*} E^{\*}\bigr)
-    \;\color{teal}{-\;f_{3}\,V'(D'-D)V'^{T}}
-    \qquad\text{(shape correction)}
+    \frac{d S^{*}}{d t^{*}}
+      = (\Omega^{*} S^{*} - S^{*} \Omega^{\*})
+      - \frac{f_{1}}{\mathrm{Ca}}\bigl[\,S^{*}-g(S^{*})I\,\bigr]
+      + f_{2}\bigl(E^{*} S^{*} + S^{*} E^{\*}\bigr)
+      \;\color{teal}{-\;f_{3}\,V'(D'-D)V'^{T}}
+      \qquad\text{(shape correction)}
   \]</div>
 
-  <!-- 子弹 2 -->
   <h3 style="margin-top:1.2rem;">2&nbsp;·&nbsp;Turn‑off near steady state</h3>
   <div class="math-block">\[
-    f_{3} \;=\;
+    f_{3} =
       \begin{cases}
-        0, & \displaystyle
-        \Bigl\lVert \frac{d S^{\*}}{d t^{\*}} \Bigr\rVert_{F} \le 0.01, \\[10pt]
+        0, & \displaystyle\Bigl\lVert \frac{d S^{*}}{d t^{*}} \Bigr\rVert_{F} \le 0.01, \\[10pt]
         \tau_{\eta}^{\text{LB}}, & \text{otherwise.}
       \end{cases}
   \]</div>
 
-  <!-- 子弹 3 -->
   <h3 style="margin-top:1.2rem;">3&nbsp;·&nbsp;Outcome</h3>
-  <p style="margin-left:1rem;">The correction fully nullifies the geometrical error in the rotational‑flow test case.</p>
+  <p style="margin-left:1rem;">The correction fully nullifies the geometrical error in the rotational‑flow test case. More details are in the thesis.</p>
 </section>
 
 <!-- ===== Bubble Snapshot ===== -->
