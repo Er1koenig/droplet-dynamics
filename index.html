@@ -14,7 +14,54 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RhCeKEeyiLdZ28yY7mVt8XzfnOz2bNqsTP7PvpB3qHwD6PPV6cO9HcL7JQhN4F5m2dlHtb1zGuUHmXn4b8vLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- MathJax for LaTeX -->
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+  window.MathJax = {
+    startup: {
+      ready() {
+        MathJax.startup.defaultReady();
+
+        function fitOne(container){
+          const parent = container.closest('.math-block') || container.parentElement;
+          if (!parent) return;
+
+          // 允许通过 data-min / data-max（百分比）在每个 .math-block 上定制
+          const minPct = Number(parent.dataset.min) || 60;   // 最小 60%
+          const maxPct = Number(parent.dataset.max) || 90;  // 最大 100%
+
+          // 先还原到基准字号再测量自然宽度
+          container.style.fontSize = '';
+          const maxW = parent.clientWidth;
+          const w = container.scrollWidth || container.getBoundingClientRect().width;
+          if (!w || !maxW) return;
+
+          const scale = Math.min(1, maxW / w);
+          const pct = Math.max(minPct, Math.min(maxPct, Math.round(scale * 100)));
+          container.style.fontSize = pct + '%';
+        }
+
+        function fitAll(){
+          document.querySelectorAll('.math-block mjx-container').forEach(fitOne);
+        }
+
+        // MathJax 完成排版后适配一次
+        MathJax.startup.promise.then(() => {
+          requestAnimationFrame(fitAll);
+        });
+
+        // 监听窗口和容器尺寸变化，自动重算
+        window.addEventListener('resize', fitAll);
+        const ro = new ResizeObserver(fitAll);
+        document.querySelectorAll('.math-block').forEach(el => ro.observe(el));
+      }
+    }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  .math-block{ overflow:hidden; }          /* 防止视觉外溢 */
+  .math-block mjx-container{ white-space: nowrap; }  /* 强制一行 */
+</style>
   
   <style>
     /* ===== Theme tokens (aligned with your homepage) ===== */
