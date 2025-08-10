@@ -26,7 +26,7 @@
 
           // 允许通过 data-min / data-max（百分比）在每个 .math-block 上定制
           const minPct = Number(parent.dataset.min) || 60;   // 最小 60%
-          const maxPct = Number(parent.dataset.max) || 90;  // 最大 100%
+          const maxPct = Number(parent.dataset.max) || 100;  // 最大 100%
 
           // 先还原到基准字号再测量自然宽度
           container.style.fontSize = '';
