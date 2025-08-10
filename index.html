@@ -14,35 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RhCeKEeyiLdZ28yY7mVt8XzfnOz2bNqsTP7PvpB3qHwD6PPV6cO9HcL7JQhN4F5m2dlHtb1zGuUHmXn4b8vLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- MathJax for LaTeX -->
-  <script>
-  window.MathJax = {
-    startup: {
-      ready() {
-        MathJax.startup.defaultReady();
-        function fitMath(){
-          document.querySelectorAll('.math-block .mjx-container').forEach(el=>{
-            const parent = el.parentElement;          // .math-block
-            const maxW = parent.clientWidth;
-            el.style.transform = '';                  // 先清空再测量
-            el.style.transformOrigin = 'left top';
-            el.style.display = 'inline-block';
-            const w = el.scrollWidth;
-            const scale = Math.min(1, maxW / w);
-            el.style.transform = `scale(${scale})`;
-          });
-        }
-        // 初次与窗口变化时适配
-        requestAnimationFrame(fitMath);
-        window.addEventListener('resize', fitMath);
-      }
-    }
-  };
-</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<style>
-  .math-block{ overflow:hidden; } /* 避免缩放前的视觉外溢 */
-</style>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
   <style>
     /* ===== Theme tokens (aligned with your homepage) ===== */
