@@ -14,8 +14,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RhCeKEeyiLdZ28yY7mVt8XzfnOz2bNqsTP7PvpB3qHwD6PPV6cO9HcL7JQhN4F5m2dlHtb1zGuUHmXn4b8vLAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- MathJax for LaTeX -->
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['\\[','\\]'], ['$$','$$']],
+        packages: {'[+]': ['noerrors','noundefined','color']}
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
   <style>
     /* ===== Theme tokens (aligned with your homepage) ===== */
     :root{
@@ -152,30 +162,36 @@
       <h2 class="section-title">Part III — Correction Scheme for Rotation-Induced Geometrical Error</h2>
 
       <h3>1 · Probing the error ⇒ correction</h3>
-      <div class="math-block">\\[
-        S' \;=\; S^{*}
-            + \\left.\\dfrac{\\partial S^{*}}{\\partial t^{*}}\\right|_{\\text{vorticity}}
-              \\,\\Delta t^{*}
-            \;=\\; V' D' V'^{T}
-      \\]</div>
+      <div class="math-block">
+        \[
+          S' = S^{*}
+            + \left.\frac{\partial S^{*}}{\partial t^{*}}\right|_{\text{vorticity}}\,
+              \Delta t^{*}
+            = V' D' V'^{T}
+        \]
+      </div>
 
-      <div class="math-block">\\[
-        \\frac{d S^{*}}{d t^{*}}
-          = (\\Omega^{*} S^{*} - S^{*} \\Omega^{*})
-          - \\frac{f_{1}}{\\mathrm{Ca}}\\bigl[\\,S^{*}-g(S^{*})I\\,\\bigr]
-          + f_{2}\\bigl(E^{*} S^{*} + S^{*} E^{*}\\bigr)
-          \\;\\color{teal}{-\\;f_{3}\\,V'(D'-D)V'^{T}}
-          \\qquad\\text{(shape correction)}
-      \\]</div>
+      <div class="math-block">
+        \[
+          \frac{d S^{*}}{d t^{*}}
+            = (\Omega^{*} S^{*} - S^{*} \Omega^{*})
+            - \frac{f_{1}}{\mathrm{Ca}}\bigl[S^{*}-g(S^{*})I\bigr]
+            + f_{2}\bigl(E^{*} S^{*} + S^{*} E^{*}\bigr)
+            \;{\color{teal}{-\;f_{3}\,V'(D'-D)V'^{T}}}
+            \quad\text{(shape correction)}
+        \]
+      </div>
 
       <h3>2 · Turn-off near steady state</h3>
-      <div class="math-block">\\[
-        f_{3} =
-          \\begin{cases}
-            0, & \\displaystyle\\Bigl\\lVert \\frac{d S^{*}}{d t^{*}} \\Bigr\\rVert_{F} \\le 0.01, \\\\[10pt]
-            \\tau_{\\eta}^{\\text{LB}}, & \\text{otherwise.}
-          \\end{cases}
-      \\]</div>
+      <div class="math-block">
+        \[
+          f_{3} =
+            \begin{cases}
+              0, & \displaystyle\Bigl\lVert \frac{d S^{*}}{d t^{*}} \Bigr\rVert_{F} \le 0.01,\\[10pt]
+              \tau_{\eta}^{\text{LB}}, & \text{otherwise.}
+            \end{cases}
+        \]
+      </div>
 
       <h3>3 · Outcome</h3>
       <p class="muted">The scheme cancels the geometry error caused by droplet rotation; details are in the thesis.</p>
@@ -184,19 +200,13 @@
     <!-- ===== Part IV — Snapshots ===== -->
     <section id="bubble" class="section">
       <h2 class="section-title">Part IV — Snapshots</h2>
-      <p class="muted">Bubbles in isotropic decaying turbulence.</p>
       <figure class="fig">
         <div class="media">
           <img src="image/bubbles.png" alt="Bubbles in isotropic turbulence">
         </div>
         <figcaption class="cap">Instantaneous bubble distribution in a decaying isotropic flow.</figcaption>
       </figure>
-    </section>
-
-    <!-- ===== Part V — Flow Field ===== -->
-    <section id="flow-field" class="section">
-      <h2 class="section-title">Part V — Flow Field</h2>
-      <p class="muted">Flow velocity in the x-direction.</p>
+      
       <figure class="fig">
         <div class="media">
           <img src="image/flow.png" alt="Droplet-laden turbulence field">
